@@ -15,7 +15,7 @@ scores = [0, 0];
 roundScore = 0;
 activePlayer = 1;
 
-dice = Math.floor(Math.random() * 6) + 1;
+// dice = Math.floor(Math.random() * 6) + 1;
 // console.log(dice);  It's removed because it is now declared down here ----document.querySelector('#score-0').textContent = dice;------
 
 
@@ -31,3 +31,21 @@ console.log(x);
 
 // Example of using DOM to select CSS property
 document.querySelector('.dice').style.display = 'none';
+
+
+// we use btn down here, instead of btn()
+// This called call-back function, its a function that we pass into another function, as an argument
+// function that is not call by us, but by another function as an argument
+// However, here, we are using anonimouse function --- function() {.....}
+document.querySelector('.btn-roll').addEventListener('click', function() {
+
+    // 1. Random number
+    dice = Math.floor(Math.random() * 6) + 1;    
+
+    // 2. Display the result
+
+
+    // 3. Update the round score IF the rolled number is NOT a 1
+    
+    
+});
