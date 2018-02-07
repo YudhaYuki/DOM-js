@@ -33,6 +33,14 @@ activePlayer = 1;
 document.querySelector('.dice').style.display = 'none';
 
 
+// Selecting elements by using getElementById instead of querySelector
+document.getElementById('score-0').textContent = '0';
+document.getElementById('score-1').textContent = '0';
+document.getElementById('current-0').textContent = '0';
+document.getElementById('current-1').textContent = '0';
+
+
+
 // we use btn down here, instead of btn()
 // This called call-back function, its a function that we pass into another function, as an argument
 // function that is not call by us, but by another function as an argument
