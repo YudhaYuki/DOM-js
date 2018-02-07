@@ -21,12 +21,12 @@ activePlayer = 1;
 
 // change the content of HTML element
 // There are two ways of changing the content of the selection, first is TEXTCONTENT and second is INNERHTML
-document.querySelector('#current-' + activePlayer).textContent = dice;
+// document.querySelector('#current-' + activePlayer).textContent = dice;
 // document.querySelector('#current-' + activePlayer).textContent = '<em>' + dice + '</em>';
 
 // Another way of using "DOM querySelector", just to read the value/content of the element with this id, score 0, and store it here into variabe x
-var x = document.querySelector('#score-0').textContent;
-console.log(x);
+// var x = document.querySelector('#score-0').textContent;
+// console.log(x);
 
 
 // Example of using DOM to select CSS property
@@ -40,12 +40,15 @@ document.querySelector('.dice').style.display = 'none';
 document.querySelector('.btn-roll').addEventListener('click', function() {
 
     // 1. Random number
-    dice = Math.floor(Math.random() * 6) + 1;    
+    var dice = Math.floor(Math.random() * 6) + 1;    
 
     // 2. Display the result
+    var diceDOM = document.querySelector('.dice');
+    diceDOM.style.display = 'block';  
+    diceDOM.src = 'dice-' + dice + '.png';  
 
 
     // 3. Update the round score IF the rolled number is NOT a 1
-    
+
     
 });
