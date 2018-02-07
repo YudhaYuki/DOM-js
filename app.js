@@ -13,9 +13,21 @@ var scores, roundScore, activePlayer, dice;
 
 scores = [0, 0];
 roundScore = 0;
-activePlayer = 0;
+activePlayer = 1;
 
 dice = Math.floor(Math.random() * 6) + 1;
 // console.log(dice);  It's removed because it is now declared down here ----document.querySelector('#score-0').textContent = dice;------
 
-document.querySelector('#current-0').textContent = dice;
+
+// change the content of HTML element
+// There are two ways of changing the content of the selection, first is TEXTCONTENT and second is INNERHTML
+document.querySelector('#current-' + activePlayer).textContent = dice;
+// document.querySelector('#current-' + activePlayer).textContent = '<em>' + dice + '</em>';
+
+// Another way of using "DOM querySelector", just to read the value/content of the element with this id, score 0, and store it here into variabe x
+var x = document.querySelector('#score-0').textContent;
+console.log(x);
+
+
+// Example of using DOM to select CSS property
+document.querySelector('.dice').style.display = 'none';
