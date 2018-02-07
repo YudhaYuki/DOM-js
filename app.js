@@ -16,4 +16,6 @@ roundScore = 0;
 activePlayer = 0;
 
 dice = Math.floor(Math.random() * 6) + 1;
-console.log(dice);
+// console.log(dice);  It's removed because it is now declared down here ----document.querySelector('#score-0').textContent = dice;------
+
+document.querySelector('#current-0').textContent = dice;
