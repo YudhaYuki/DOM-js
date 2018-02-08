@@ -13,7 +13,7 @@ var scores, roundScore, activePlayer, dice;
 
 scores = [0, 0];
 roundScore = 0;
-activePlayer = 1;
+activePlayer = 0;
 
 // dice = Math.floor(Math.random() * 6) + 1;
 // console.log(dice);  It's removed because it is now declared down here ----document.querySelector('#score-0').textContent = dice;------
@@ -55,8 +55,15 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
     diceDOM.style.display = 'block';  
     diceDOM.src = 'dice-' + dice + '.png';  
 
-
     // 3. Update the round score IF the rolled number is NOT a 1
+    if (dice !== 1) {
+        // AAdd score
+        roundScore += dice; // similar when we write it like this         roundScore = roundScore + dice;
+        document.querySelector('#current-' + activePlayer).textContent = roundScore;
+        
+    } else {
+        //Next player
+    }
 
     
 });
