@@ -9,7 +9,7 @@ GAME RULES:
 
 */
 
-var scores, roundScore, activePlayer, dice;
+var scores, roundScore, activePlayer, gamePlaying;
 
 init();
 
@@ -49,43 +49,47 @@ document.getElementById('current-1').textContent = '0';
 // function that is not call by us, but by another function as an argument
 // However, here, we are using anonimouse function --- function() {.....}
 document.querySelector('.btn-roll').addEventListener('click', function() {
-
-    // 1. Random number
-    var dice = Math.floor(Math.random() * 6) + 1;    
-
-    // 2. Display the result
-    var diceDOM = document.querySelector('.dice');
-    diceDOM.style.display = 'block';  
-    diceDOM.src = 'dice-' + dice + '.png';  
-
-    // 3. Update the round score IF the rolled number is NOT a 1
-    if (dice !== 1) {
-        // AAdd score
-        roundScore += dice; // similar when we write it like this         roundScore = roundScore + dice;
-        document.querySelector('#current-' + activePlayer).textContent = roundScore;
-        
-    } else {
-        // We just call this function, before we create this down here, but since we use it over and over again, we use DRY PRINCIPLE
-        nextPlayer();
+    if (gamePlaying) {
+        // 1. Random number
+        var dice = Math.floor(Math.random() * 6) + 1;    
+    
+        // 2. Display the result
+        var diceDOM = document.querySelector('.dice');
+        diceDOM.style.display = 'block';  
+        diceDOM.src = 'dice-' + dice + '.png';  
+    
+        // 3. Update the round score IF the rolled number is NOT a 1
+        if (dice !== 1) {
+            // AAdd score
+            roundScore += dice; // similar when we write it like this         roundScore = roundScore + dice;
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+            
+        } else {
+            // We just call this function, before we create this down here, but since we use it over and over again, we use DRY PRINCIPLE
+            nextPlayer();
+        }
     }
 });
 
 document.querySelector('.btn-hold').addEventListener('click', function() {
-    // Add CURENT score to GLOBAL SCORE
-    scores[activePlayer] += roundScore; // another way        scores[activePlayer] = scores[activePlayer] + roundScore;    
-
-    // Update the UI
-    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
-
-    // Check if the player won the game
-    if (scores[activePlayer] >= 20) {
-        document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
-        document.querySelector('.dice').style.display = 'none';
-        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
-        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');        
-    } else {
-        // Next player
-        nextPlayer();
+    if (gamePlaying) {
+        // Add CURENT score to GLOBAL SCORE
+        scores[activePlayer] += roundScore; // another way        scores[activePlayer] = scores[activePlayer] + roundScore;    
+    
+        // Update the UI
+        document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+    
+        // Check if the player won the game
+        if (scores[activePlayer] >= 20) {
+            document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
+            document.querySelector('.dice').style.display = 'none';
+            document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+            document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');    
+            gamePlaying = false;    
+        } else {
+            // Next player
+            nextPlayer();
+        }
     }
 });
 
@@ -127,6 +131,7 @@ function init() {
     scores = [0, 0];
     activePlayer = 0;
     roundScore = 0;
+    gamePlaying = true;
 
     document.querySelector('.dice').style.display = 'none';
 
