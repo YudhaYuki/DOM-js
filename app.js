@@ -87,7 +87,8 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         document.querySelector('.player-0-panel').classList.toggle('active');
         document.querySelector('.player-1-panel').classList.toggle('active');
         
-        
+        // Hide the dice when player changes
+        document.querySelector('.dice').style.display = 'none';
         
     }
 
