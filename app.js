@@ -73,6 +73,13 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
             activePlayer = 0;
         }
         */
+
+        // Change the total score to 0 when currentPlayer is changed (Without this, the previouse score from the priviouse play will be added into the new currentPlayer)
+        roundScore = 0;
+
+        document.getElementById('current-0').textContent = '0';
+        document.getElementById('current-1').textContent = '0';
+        
     }
 
     
