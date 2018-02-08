@@ -11,9 +11,12 @@ GAME RULES:
 
 var scores, roundScore, activePlayer, dice;
 
-scores = [0, 0]; // Store score for both players
-roundScore = 0;
-activePlayer = 0; // stores score into active player
+init();
+
+// We remove these line since we use it in the other, so we use DRY Principle, this case named INIT();
+// scores = [0, 0]; // Store score for both players
+// roundScore = 0;
+// activePlayer = 0; // stores score into active player
 
 // dice = Math.floor(Math.random() * 6) + 1;
 // console.log(dice);  It's removed because it is now declared down here ----document.querySelector('#score-0').textContent = dice;------
@@ -28,7 +31,7 @@ activePlayer = 0; // stores score into active player
 // var x = document.querySelector('#score-0').textContent;
 // console.log(x);
 
-
+/*
 // Example of using DOM to select CSS property
 document.querySelector('.dice').style.display = 'none';
 
@@ -38,7 +41,7 @@ document.getElementById('score-0').textContent = '0';
 document.getElementById('score-1').textContent = '0';
 document.getElementById('current-0').textContent = '0';
 document.getElementById('current-1').textContent = '0';
-
+*/
 
 
 // we use btn down here, instead of btn()
@@ -112,8 +115,23 @@ function nextPlayer() {
         document.querySelector('.player-1-panel').classList.toggle('active');
         
         // Hide the dice when player changes
-        document.querySelector('.dice').style.display = 'none';
-
-
-        
+        document.querySelector('.dice').style.display = 'none';       
 }
+
+// not calling. but pssing it (init function/method), here, into this even listener function.
+// Thats why we don't need to use call operator here -- init() --, because if I would, this function will immediately call
+// But we don't want this happens, we just want to tell the event listener that "When someone clicks this button, call the init function for me"
+document.querySelector('.btn-new').addEventListener('click', init);
+
+function init() {
+    scores = [0, 0];
+    activePlayer = 0;
+    roundScore = 0;
+
+    document.querySelector('.dice').style.display = 'none';
+
+    document.getElementById('score-0').textContent = '0';
+    document.getElementById('score-1').textContent = '0';
+    document.getElementById('current-0').textContent = '0';
+    document.getElementById('current-1').textContent = '0';
+};
