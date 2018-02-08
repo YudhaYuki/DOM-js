@@ -13,41 +13,8 @@ var scores, roundScore, activePlayer, gamePlaying;
 
 init();
 
-// We remove these line since we use it in the other, so we use DRY Principle, this case named INIT();
-// scores = [0, 0]; // Store score for both players
-// roundScore = 0;
-// activePlayer = 0; // stores score into active player
+var lastDice;
 
-// dice = Math.floor(Math.random() * 6) + 1;
-// console.log(dice);  It's removed because it is now declared down here ----document.querySelector('#score-0').textContent = dice;------
-
-
-// change the content of HTML element
-// There are two ways of changing the content of the selection, first is TEXTCONTENT and second is INNERHTML
-// document.querySelector('#current-' + activePlayer).textContent = dice;
-// document.querySelector('#current-' + activePlayer).textContent = '<em>' + dice + '</em>';
-
-// Another way of using "DOM querySelector", just to read the value/content of the element with this id, score 0, and store it here into variabe x
-// var x = document.querySelector('#score-0').textContent;
-// console.log(x);
-
-/*
-// Example of using DOM to select CSS property
-document.querySelector('.dice').style.display = 'none';
-
-
-// Selecting elements by using getElementById instead of querySelector
-document.getElementById('score-0').textContent = '0';
-document.getElementById('score-1').textContent = '0';
-document.getElementById('current-0').textContent = '0';
-document.getElementById('current-1').textContent = '0';
-*/
-
-
-// we use btn down here, instead of btn()
-// This called call-back function, its a function that we pass into another function, as an argument
-// function that is not call by us, but by another function as an argument
-// However, here, we are using anonimouse function --- function() {.....}
 document.querySelector('.btn-roll').addEventListener('click', function() {
     if (gamePlaying) {
         // 1. Random number
@@ -59,15 +26,28 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         diceDOM.src = 'dice-' + dice + '.png';  
     
         // 3. Update the round score IF the rolled number is NOT a 1
-        if (dice !== 1) {
+        if (dice === 6 && lastDice === 6) {
+            // player looses score
+            scores[activePlayer] = 0;
+            document.querySelector('#score-' + activePlayer).textContent = 0;           
+            nextPlayer(); 
+
+        } else if (dice !== 1) {
             // AAdd score
             roundScore += dice; // similar when we write it like this         roundScore = roundScore + dice;
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
             
         } else {
+            lastDice = -1;
             // We just call this function, before we create this down here, but since we use it over and over again, we use DRY PRINCIPLE
             nextPlayer();
         }
+
+        // We generate all the dice number (1. random number above)
+        // then we do all of this stuff, then we check the dice number
+        // So if we store the last dice number, we can use that variable
+        // The next time that the function runs
+        lastDice = dice;
     }
 });
 
