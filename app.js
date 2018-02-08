@@ -75,12 +75,15 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
     // Check if the player won the game
-    if (scores[activePlayer] >= 10) {
+    if (scores[activePlayer] >= 100) {
         document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
+        document.querySelector('.dice').style.display = 'none';
+        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');        
+    } else {
+        // Next player
+        nextPlayer();
     }
-    
-    // Next player
-    nextPlayer();
 });
 
 function nextPlayer() {
@@ -94,7 +97,6 @@ function nextPlayer() {
         //     activePlayer = 0;
         // }
         // */
-        
 
         // Change the total score to 0 when currentPlayer is changed (Without this, the previouse score from the priviouse play will be added into the new currentPlayer)
         roundScore = 0;
