@@ -11,9 +11,9 @@ GAME RULES:
 
 var scores, roundScore, activePlayer, dice;
 
-scores = [0, 0];
+scores = [0, 0]; // Store score for both players
 roundScore = 0;
-activePlayer = 0;
+activePlayer = 0; // stores score into active player
 
 // dice = Math.floor(Math.random() * 6) + 1;
 // console.log(dice);  It's removed because it is now declared down here ----document.querySelector('#score-0').textContent = dice;------
@@ -62,17 +62,35 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         document.querySelector('#current-' + activePlayer).textContent = roundScore;
         
     } else {
+        // We just call this function, before we create this down here, but since we use it over and over again, we use DRY PRINCIPLE
+        nextPlayer();
+    }
+});
+
+document.querySelector('.btn-hold').addEventListener('click', function() {
+    // Add CURENT score to GLOBAL SCORE
+    scores[activePlayer] += roundScore; // another way        scores[activePlayer] = scores[activePlayer] + roundScore;    
+
+    // Update the UI
+    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+
+    // Check if the player won the game
+    // Next player
+    nextPlayer();
+});
+
+function nextPlayer() {
         //Next player
         activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-
-        /*
-        The same way just like above
-        if(activePlayer === 0) {
-            activePlayer = 1;
-        } else {
-            activePlayer = 0;
-        }
-        */
+        // /*
+        // The same way just like above
+        // if(activePlayer === 0) {
+        //     activePlayer = 1;
+        // } else {
+        //     activePlayer = 0;
+        // }
+        // */
+        
 
         // Change the total score to 0 when currentPlayer is changed (Without this, the previouse score from the priviouse play will be added into the new currentPlayer)
         roundScore = 0;
@@ -90,7 +108,4 @@ document.querySelector('.btn-roll').addEventListener('click', function() {
         // Hide the dice when player changes
         document.querySelector('.dice').style.display = 'none';
         
-    }
-
-    
-});
+}
